@@ -32,19 +32,22 @@ for i in data:
         F += 1
 # 数据
 labels = ['花叶类', '花菜类', '辣椒类', '茄类', '食用菌', '水生根茎类']
-sizes = [A, B, C, D, E, F]
-colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue']
-explode = (0.1, 0.05, 0.1, 0.05, 0.05, 0.05)  # 仅"爆炸"第一个扇区
+sizes = [A, B, C, D, E, F]      #占比
+colors = ['gold', 'yellowgreen', 'lightcoral', 'lightskyblue', 'lightgreen', 'lightpink']#颜色
+explode = (0.02, 0.02, 0.02, 0.02, 0.02, 0.02)  # 让扇区裂开
 
 # 绘制饼状图
 plt.figure(figsize=(8, 8))
-plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', startangle=140, shadow=True)
+plt.pie(sizes, labels=labels, colors=colors, explode=explode, autopct='%1.1f%%', startangle=140, shadow=False)
 
 # 设置标题
 plt.title('Pie Chart with Exploded Slice')
 
 # 添加图例
-plt.legend(labels, loc="best")
+plt.legend(labels, loc="best", bbox_to_anchor=(1.15, 1))
+
+# 调整图形的布局，使图例不重叠
+plt.tight_layout()
 
 # 显示图形
 plt.show()

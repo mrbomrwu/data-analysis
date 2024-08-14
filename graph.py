@@ -6,31 +6,52 @@ import matplotlib.font_manager as fm
 plt.rcParams['font.sans-serif'] = ['SimHei']  # 使用黑体字体
 plt.rcParams['axes.unicode_minus'] = False  # 解决负号显示问题
 
-# 示例数据
-data = {
-    '时间': ['2020Q3', '2020Q4', '2021Q1', '2021Q2', '2021Q3', '2021Q4', '2022Q1', '2022Q2', '2022Q3', '2022Q4', '2023Q1', '2023Q2'],
-    '花菜类': [100, 150, 200, 250, 300, 250, 200, 150, 100, 50, 0, 50],
-    '花叶类': [50, 100, 150, 200, 250, 300, 250, 200, 150, 100, 50, 0],
-    '辣椒类': [0, 50, 100, 150, 200, 250, 300, 250, 200, 150, 100, 50],
-    '茄类': [50, 0, 50, 100, 150, 200, 250, 300, 250, 200, 150, 100],
-    '食用菌': [100, 50, 0, 50, 100, 150, 200, 250, 300, 250, 200, 150],
-    '水生根茎类': [150, 100, 50, 0, 50, 100, 150, 200, 250, 300, 250, 200]
-}
+df = pd.read_excel(
+    'C:/Users/海棠微雨/Desktop/C题/附件1.xlsx',
+    sheet_name='Sheet1',
+    header=0,  # 第一行作为列名
+    usecols='A:D',  # 读取 A 到 D 列
+    index_col=None,  # 第一列作为行索引
+    skiprows=0,  # 不跳过
+    nrows=None  # 读取所有 行
+)
 
-df = pd.DataFrame(data)
+df1 = pd.read_excel(
+    'C:/Users/海棠微雨/Desktop/C题/附件2.xlsx',
+    sheet_name='Sheet1',
+    header=0,  # 第一行作为列名
+    usecols='A:G',  # 读取 A 到 D 列
+    index_col=None,  # 第一列作为行索引
+    skiprows=0,  # 不跳过
+    nrows=None  # 读取所有 行
+)
 
-# 绘制多线图
-plt.figure(figsize=(10, 6))
-for column in df.columns[1:]:
-    plt.plot(df['时间'], df[column], label=column)
+encoder = df['单品编码']
+name = df['分类名称']
 
-# 添加图例
-plt.legend(loc='upper left')
+# 使用 zip() 函数将两个列表合并为一个字典
+my_dict = dict(zip(encoder, name))
 
-# 添加标题和标签
-plt.title('多线图示例')
-plt.xlabel('时间')
-plt.ylabel('数值')
+encoder1 = df1['单品编码']
+date = df1['扫码销售时间']
+Sales_status = df1['销售类型']
 
-# 显示图形
-plt.show()
+my_dict1 = dict(zip(date, encoder1))
+first_key, first_value = next(iter(my_dict1.items()))
+print(first_key, first_value)
+
+# # 绘制多线图
+# plt.figure(figsize=(10, 6))
+# for column in df.columns[1:]:
+#     plt.plot(df['时间'], df[column], label=column)
+
+# # 添加图例
+# plt.legend(loc='upper left')
+
+# # 添加标题和标签
+# plt.title('多线图示例')
+# plt.xlabel('时间')
+# plt.ylabel('数值')
+
+# # 显示图形
+# plt.show()
